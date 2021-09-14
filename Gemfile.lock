@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    sorta-lens (0.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  sorta-lens!
+
+BUNDLED WITH
+   2.2.27

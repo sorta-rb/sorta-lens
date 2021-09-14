@@ -7,18 +7,22 @@ class TypedLens
   end
 
   def initialize(**kwargs)
-    validate_arguments(kwargs)
     @kwargs = kwargs
+    validate_arguments
+    define_call
+  end
+
+  def define_call
     define_singleton_method :call do |object|
-      kwargs.each_with_object({}) do |(sym, _ty), acc|
+      @kwargs.each_with_object({}) do |(sym, _ty), acc|
         val = extract(sym, object)
         acc[sym] = typecheck(sym, val)
       end
     end
   end
 
-  def validate_arguments(kwargs)
-    kwargs.each do |(sym, ty)|
+  def validate_arguments
+    @kwargs.each do |(sym, ty)|
       unless sym.is_a?(Symbol) && ty.is_a?(Class)
         raise ArgumentError,
               "Unexpected argument (#{sym.class} => #{ty.class}), must be (Symbol => Class)"

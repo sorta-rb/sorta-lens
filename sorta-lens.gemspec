@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
                    'lib/lens/typed_lens.rb']
   s.homepage    = ''
   s.license = 'MIT'
+  s.add_development_dependency 'rspec'
 end
