@@ -2,6 +2,7 @@
 
 require 'lens/lens'
 require 'lens/typed_lens'
+require 'lens/lens_builder'
 
 module Sorta
   # Type error
