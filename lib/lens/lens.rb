@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Extracts data from a given object
-class Lens
+module Lens
   def self.on(*args)
     lambda do |object|
       args.each_with_object({}) do |sym, acc|
