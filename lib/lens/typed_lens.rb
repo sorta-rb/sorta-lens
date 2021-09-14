@@ -3,7 +3,7 @@
 # Extracts data from a given object
 class TypedLens
   def self.on(**kwargs)
-    new kwargs
+    new(**kwargs)
   end
 
   def initialize(**kwargs)
