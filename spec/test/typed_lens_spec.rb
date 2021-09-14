@@ -15,4 +15,10 @@ describe TypedLens do
     expect { TypedLens.on('Not a symbol') }.to raise_error(ArgumentError)
     expect { TypedLens.on('Not a symbol' => 'Not a symbol') }.to raise_error(ArgumentError)
   end
+
+  it 'checks types' do
+    lens = TypedLens.on(a: String)
+    hash = { a: 1 }
+    expect { lens.call(hash) }.to raise_error(TypedLens::TypeError)
+  end
 end
