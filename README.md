@@ -1,4 +1,4 @@
-# Sorta-lens
+# Sorta-lens [![Ruby](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml)
 Simple lensing for your data extraction needs
 
 ## Usage
