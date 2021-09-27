@@ -1,34 +1,45 @@
 # frozen_string_literal: true
 
 module Sorta
-  # Extracts data from a given object
+  # Lens builder
   class Lens
-    def self.on(*args)
-      new(*args)
+    def self.typed
+      new.typed
     end
 
-    def initialize(*args)
-      @args = args
-      validate_arguments
-      define_call
+    def self.indifferent
+      new.indifferent
     end
 
-    def define_call
-      define_singleton_method :call do |object|
-        @args.each_with_object({}) do |sym, acc|
-          acc[sym] = object.send(sym)
-        rescue NoMethodError
-          acc[sym] = object[sym]
-        end
-      end
+    def self.on(...)
+      new.on(...)
     end
 
-    def validate_arguments
-      @args.each do |sym|
-        unless sym.is_a?(Symbol)
-          raise ArgumentError,
-                "Unexpected argument #{sym.class}, must be Symbol"
-        end
+    def initialize
+      @typed = false
+      @indifferent = false
+    end
+
+    def typed
+      @typed = true
+      self
+    end
+
+    def indifferent
+      @indifferent = true
+      self
+    end
+
+    def on(...)
+      case [@indifferent, @typed]
+      when [true, true]
+        Sorta.todo!
+      when [true, false]
+        Sorta.todo!
+      when [false, false]
+        Untyped.new(...)
+      when [false, true]
+        Typed.new(...)
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'lens/lens'
 require 'lens/typed_lens'
-require 'lens/lens_builder'
+require 'lens/untyped'
 
 module Sorta
   # Type error
@@ -10,5 +10,9 @@ module Sorta
     def initialize(expected_ty, actual_ty)
       super "Unexpected type. Expected #{expected_ty} got #{actual_ty}"
     end
+  end
+
+  def self.todo!
+    raise StandardError, 'Unimplemented!'
   end
 end
