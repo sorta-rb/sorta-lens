@@ -13,5 +13,4 @@ Gem::Specification.new do |s|
                    'lib/lens/untyped.rb']
   s.metadata = { 'source_code_uri' => 'https://github.com/sorta-rb/sorta-lens' }
   s.license = 'MIT'
-  s.add_development_dependency 'rspec', '~> 3.0'
 end
