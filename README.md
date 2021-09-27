@@ -1,5 +1,15 @@
-# Sorta-lens [![Ruby](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml)
+# Sorta-lens  [![Gem Version](https://badge.fury.io/rb/sorta-lens.svg)](https://badge.fury.io/rb/sorta-lens)  [![Ruby](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/sorta-rb/sorta-lens/actions/workflows/main.yml)
 Simple lensing for your data extraction needs
+
+## Installation
+Add it to your gemfile:
+```Gemfile
+gem 'sorta-lens', '~> 0.1.0'
+```
+or install globally for use in scripts or IRB
+```sh
+gem install sorta-lens
+```
 
 ## Usage
 Simply instantiate a Lens and start applying it to your objects:
