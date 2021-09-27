@@ -3,6 +3,10 @@
 module Sorta
   # Lens builder
   class Lens
+    def self.todo!
+      raise StandardError, "Unimplemented!"
+    end
+
     def self.typed
       new.typed
     end
@@ -33,9 +37,9 @@ module Sorta
     def on(...)
       case [@indifferent, @typed]
       when [true, true]
-        Sorta.todo!
+        todo!
       when [true, false]
-        Sorta.todo!
+        todo!
       when [false, false]
         Untyped.new(...)
       when [false, true]
