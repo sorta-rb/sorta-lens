@@ -14,11 +14,16 @@ module Sorta
         @getable = object.respond_to? :[]
         result =
           @keys.zip(@types).each_with_object({}) do |(sym, ty), acc|
-            val = extract(sym, object)
-            acc[sym] = typecheck(val, ty)
+            acc[sym] = extract(sym, object, ty)
           end
         @getable = nil
         result
+      end
+
+      def extract(sym, object, ty)
+        super(sym, object).then do |val|
+          typecheck(val, ty)
+        end
       end
 
       def validate_types
