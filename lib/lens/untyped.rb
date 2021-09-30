@@ -14,10 +14,20 @@ module Sorta
       end
 
       def call(object)
+        @getable = object.respond_to? :[]
         @args.each_with_object({}) do |sym, acc|
-          acc[sym] = object.send(sym)
-        rescue NoMethodError
-          acc[sym] = object[sym]
+          acc[sym] = extract(sym, object)
+        end
+        @getable = nil
+      end
+
+      def extract(sym, object)
+        if @getable
+          object[sym]
+        elsif object.respond_to? sym
+          object.send(sym)
+        else
+          raise ArgumentError, "Object #{object} does not support extracting this symbol #{sym}"
         end
       end
 

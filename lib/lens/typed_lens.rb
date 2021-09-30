@@ -14,10 +14,12 @@ module Sorta
       end
 
       def call(object)
+        @getable = object.respond_to? :[]
         @kwargs.each_with_object({}) do |(sym, _ty), acc|
           val = extract(sym, object)
           acc[sym] = typecheck(sym, val)
         end
+        @getable = nil
       end
 
       def validate_arguments
@@ -30,9 +32,11 @@ module Sorta
       end
 
       def extract(sym, object)
-        object.send(sym)
-      rescue NoMethodError
-        object[sym]
+        if @getable
+          object[sym]
+        elsif object.respond_to? sym
+          object.send(sym)
+        end
       end
 
       def typecheck(sym, val)
