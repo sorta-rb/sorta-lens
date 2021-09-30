@@ -4,6 +4,7 @@ require_relative "lens/lens"
 require_relative "lens/components"
 require_relative "lens/typed"
 require_relative "lens/untyped"
+require_relative "lens/indifferent"
 require_relative "version"
 module Sorta
   class TypeError < RuntimeError

@@ -4,7 +4,7 @@ module Sorta
   class Lens
     # Extracts data from a given object
     class Untyped
-      include Sorta::Lens::Validator
+      include Sorta::Lens::Validator[Symbol]
       include Sorta::Lens::Extractor
 
       def self.on(...)

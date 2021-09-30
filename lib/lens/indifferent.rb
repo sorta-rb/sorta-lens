@@ -4,9 +4,8 @@ module Sorta
   class Lens
     # Extracts data from a given object
     class Indifferent
-      include Sorta::Lens::Validator
+      include Sorta::Lens::Validator[Symbol, String]
       include Sorta::Lens::Extractor
-      @@KEY_TYPES = [Symbol, String]
       def self.on(...)
         new(...)
       end
