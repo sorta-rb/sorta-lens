@@ -8,6 +8,15 @@ Lint/DuplicateBranch:
 Naming/FileName:
   Enabled: false
 
+Naming/MethodParameterName:
+  Enabled: false
+
+Naming/VariableName:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
