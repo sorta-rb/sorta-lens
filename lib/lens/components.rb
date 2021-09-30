@@ -2,19 +2,22 @@
 
 module Sorta
   class Lens
-    class LensBase
-      def self.on(...)
-        new(...)
-      end
+    module Typechecker
+      def typecheck(val, ty)
+        return val if val.is_a?(ty)
 
+        raise TypeError.new val.class, ty
+      end
+    end
+
+    module Validator
       @@KEY_TYPE = Symbol
-      def initialize(*keys)
-        @keys = keys
-        validate_keys
-      end
-
       def validate_keys
         validate @keys, @@KEY_TYPE
+      end
+
+      def validate_types
+        validate @types, Class
       end
 
       def validate(thing, expected)
@@ -25,13 +28,9 @@ module Sorta
           end
         end
       end
+    end
 
-      def typecheck(val, ty)
-        return val if val.is_a?(ty)
-
-        raise TypeError.new val.class, ty
-      end
-
+    module Extractor
       def extract(sym, object)
         if @getable
           object[sym]
