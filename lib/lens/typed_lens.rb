@@ -15,11 +15,12 @@ module Sorta
 
       def call(object)
         @getable = object.respond_to? :[]
-        @kwargs.each_with_object({}) do |(sym, _ty), acc|
+        result = @kwargs.each_with_object({}) do |(sym, _ty), acc|
           val = extract(sym, object)
           acc[sym] = typecheck(sym, val)
         end
         @getable = nil
+        result
       end
 
       def validate_arguments

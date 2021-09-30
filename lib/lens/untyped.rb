@@ -15,10 +15,11 @@ module Sorta
 
       def call(object)
         @getable = object.respond_to? :[]
-        @args.each_with_object({}) do |sym, acc|
+        result = @args.each_with_object({}) do |sym, acc|
           acc[sym] = extract(sym, object)
         end
         @getable = nil
+        result
       end
 
       def extract(sym, object)
