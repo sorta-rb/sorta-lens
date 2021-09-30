@@ -24,12 +24,6 @@ module Sorta
       def validate_types
         validate @types, Class
       end
-
-      def typecheck(val, ty)
-        return val if val.is_a?(ty)
-
-        raise TypeError.new val.class, ty
-      end
     end
   end
 end

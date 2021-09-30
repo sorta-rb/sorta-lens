@@ -26,6 +26,12 @@ module Sorta
         end
       end
 
+      def typecheck(val, ty)
+        return val if val.is_a?(ty)
+
+        raise TypeError.new val.class, ty
+      end
+
       def extract(sym, object)
         if @getable
           object[sym]
