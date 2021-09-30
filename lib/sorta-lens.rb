@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "lens/lens"
+require_relative "lens/base"
 require_relative "lens/typed_lens"
 require_relative "lens/untyped"
 require_relative "version"

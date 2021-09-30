@@ -3,45 +3,29 @@
 module Sorta
   class Lens
     # Extracts data from a given object
-    class Typed
-      def self.on(...)
-        new(...)
-      end
-
+    class Typed < LensBase
       def initialize(**kwargs)
-        @kwargs = kwargs
-        validate_arguments
+        @types = kwargs.values
+        validate_types
+        super(*kwargs.keys)
       end
 
       def call(object)
         @getable = object.respond_to? :[]
-        result = @kwargs.each_with_object({}) do |(sym, _ty), acc|
-          val = extract(sym, object)
-          acc[sym] = typecheck(sym, val)
-        end
+        result =
+          @keys.zip(@types).each_with_object({}) do |(sym, ty), acc|
+            val = extract(sym, object)
+            acc[sym] = typecheck(val, ty)
+          end
         @getable = nil
         result
       end
 
-      def validate_arguments
-        @kwargs.each do |(sym, ty)|
-          unless sym.is_a?(Symbol) && ty.is_a?(Class)
-            raise ArgumentError,
-                  "Unexpected argument (#{sym.class} => #{ty.class}), must be (Symbol => Class)"
-          end
-        end
+      def validate_types
+        validate @types, Class
       end
 
-      def extract(sym, object)
-        if @getable
-          object[sym]
-        elsif object.respond_to? sym
-          object.send(sym)
-        end
-      end
-
-      def typecheck(sym, val)
-        ty = @kwargs[sym]
+      def typecheck(val, ty)
         return val if val.is_a?(ty)
 
         raise TypeError.new val.class, ty
