@@ -14,4 +14,8 @@ group :development, :test do
 
   gem "rubocop-rake"
   gem "rubocop-rspec"
+
+  gem "byebug"
+  gem "pry"
+  gem "pry-byebug"
 end

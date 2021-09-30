@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "pry"
+require "byebug"
+require "pry-byebug"
 require "sorta-lens"
 
 RSpec.configure do |config|

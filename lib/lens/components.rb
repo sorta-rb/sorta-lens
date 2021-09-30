@@ -11,18 +11,18 @@ module Sorta
     end
 
     module Validator
-      @@KEY_TYPE = Symbol
+      @@KEY_TYPES = [Symbol]
       def validate_keys
-        validate @keys, @@KEY_TYPE
+        validate @keys, @@KEY_TYPES
       end
 
       def validate_types
-        validate @types, Class
+        validate @types, [Class]
       end
 
       def validate(thing, expected)
         thing.each do |sym|
-          unless sym.is_a?(expected)
+          unless expected.include? sym.class
             raise ArgumentError,
                   "Unexpected argument #{sym.class}, must be #{expected}"
           end
