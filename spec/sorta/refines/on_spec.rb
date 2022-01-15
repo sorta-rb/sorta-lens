@@ -18,41 +18,41 @@ class RefineGetterUserTestClass
 end
 
 RSpec.describe Sorta::Lens::Refines::Getter do
-  let(:test_instance) { RefineGetterUserTestClass.new(object, array) }
   let(:lens) { Sorta::Lens.on(:a, :b) }
 
-  let(:object) { double("Placeholder Object") }
-  let(:array) { double("Placeholder Array") }
-
   describe "#on" do
-    subject { test_instance.call_on(lens) }
+    it "extracts from hash" do
+      object = { a: 1, b: 2, c: 3 }
+      test_instance = RefineGetterUserTestClass.new(object, double)
+      result = test_instance.call_on(lens)
 
-    describe  "extracts from hash" do
-      let(:object) { { a: 1, b: 2, c: 3 } }
-
-      it { is_expected.to eq(a: 1, b: 2) }
+      expect(result).to eq(a: 1, b: 2)
     end
 
-    describe "extracts from methods" do
-      let(:object) { double(a: 1, b: "Bar") }
+    it "extracts from methods" do
+      object = double(a: 1, b: "Bar")
+      test_instance = RefineGetterUserTestClass.new(object, double)
+      result = test_instance.call_on(lens)
 
-      it { is_expected.to eq(a: 1, b: "Bar") }
+      expect(result).to eq(a: 1, b: "Bar")
     end
   end
 
   describe "#map_on" do
-    subject { test_instance.call_map_on(lens) }
+    it "extracts from hash" do
+      array = [{ a: 1, b: 2, c: 3 }]
+      test_instance = RefineGetterUserTestClass.new(double, array)
+      result = test_instance.call_map_on(lens)
 
-    describe  "extracts from hash" do
-      let(:array) { [{ a: 1, b: 2, c: 3 }] }
-
-      it { is_expected.to eq([{ a: 1, b: 2 }]) }
+      expect(result).to eq([{ a: 1, b: 2 }])
     end
 
-    describe "extracts from methods" do
-      let(:array) { [double(a: 1, b: "Bar")] }
+    it "extracts from methods" do
+      array = [double(a: 1, b: "Bar")]
+      test_instance = RefineGetterUserTestClass.new(double, array)
+      result = test_instance.call_map_on(lens)
 
-      it { is_expected.to eq([{ a: 1, b: "Bar" }]) }
+      expect(result).to eq([{ a: 1, b: "Bar" }])
     end
   end
 end
