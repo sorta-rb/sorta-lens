@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Sorta
-  class Lens
+  module Lens
     module Typechecker
       def typecheck(val, ty)
         return val if val.is_a?(ty)

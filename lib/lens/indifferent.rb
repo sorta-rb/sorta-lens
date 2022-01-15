@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Sorta
-  class Lens
+  module Lens
     # Extracts data from a given object
     class Indifferent
       include Sorta::Lens::Validator
