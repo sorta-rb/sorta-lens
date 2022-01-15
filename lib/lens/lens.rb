@@ -1,50 +1,33 @@
 # frozen_string_literal: true
 
+require_relative "builder"
+
 module Sorta
-  # Lens builder
-  class Lens
-    def self.todo!
-      raise StandardError, "Unimplemented!"
-    end
-
-    def self.typed
-      new.typed
-    end
-
-    def self.indifferent
-      new.indifferent
-    end
-
+  # Public API
+  module Lens
+    # @return [Untyped]
     def self.on(...)
-      new.on(...)
+      Builder.new.on(...)
     end
 
-    def initialize
-      @typed = false
-      @indifferent = false
+    # @return [Builder]
+    def self.typed
+      Builder.new.typed
     end
 
-    def typed
-      @typed = true
-      self
+    # @return [Builder]
+    def self.indifferent
+      Builder.new.indifferent
     end
 
-    def indifferent
-      @indifferent = true
-      self
-    end
-
-    def on(...)
-      case [@indifferent, @typed]
-      when [true, true]
-        todo!
-      when [true, false]
-        todo!
-      when [false, false]
-        Untyped.new(...)
-      when [false, true]
-        Typed.new(...)
-      end
+    # @return [Builder]
+    #
+    # @example
+    #   lens = Sorta::Lens.build.typed.on(foo: String)
+    #   lens.call(foo: 'Bar')
+    #
+    def self.build
+      Builder.new
     end
   end
 end
